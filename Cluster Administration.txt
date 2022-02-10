@@ -1,0 +1,180 @@
+MongoDB Cluster Administration:
+===========================
+
+mongod Options:
+mongod --help
+mongod --dbpath <directory path>
+mongod --port <port number>
+mongod --auth
+mongod --bind_ip 123.123.123.123
+mongod --bind_ip localhost,123.123.123.123
+
+Configuration File:
+mongod --dbpath /data/db --logpath /data/log/mongod.log --fork --replSet "M103" --keyFile /data/keyfile --bind_ip "127.0.0.1,192.168.103.100" --tlsMode requireTLS --tlsCAFile "/etc/tls/TLSCA.pem" --tlsCertificateKeyFile "/etc/tls/tls.pem"
+
+Can be converted to YAML file as:
+storage:
+  dbPath: "/data/db"
+systemLog:
+  path: "/data/log/mongod.log"
+  destination: "file"
+replication:
+  replSetName: M103
+net:
+  bindIp : "127.0.0.1,192.168.103.100"
+tls:
+  mode: "requireTLS"
+  certificateKeyFile: "/etc/tls/tls.pem"
+  CAFile: "/etc/tls/TLSCA.pem"
+security:
+  keyFile: "/data/keyfile"
+processManagement:
+  fork: true
+
+For more YAML config information: https://docs.mongodb.com/manual/reference/configuration-options/
+
+Question:
+Consider the following:
+mongod --dbpath /data/db --logpath /data/logs --replSet M103 --bind_ip '127.0.0.1,192.168.103.100' --keyFile /data/keyfile --fork
+Which of the following represents a configuration file equivalent to the command line options?
+
+Answer:
+storage:
+  dbPath: "/data/db"
+systemLog:
+  destination: file
+  path: "/data/logs"
+replication:
+  replSetName: "M103"
+net:
+  bindIp: "127.0.0.1,192.168.103.100"
+security:
+  keyFile: "/data/keyfile"
+processManagement:
+  fork: true
+
+
+Question:
+Write the configuration file. There should be an empty configuration file in your IDE File Editor, where you can specify options in YAML.
+As a reminder, here are the requirements of your mongod instance:
+	•	run on port 27000
+	•	authentication is enabled
+	•	
+Answer:
+net:
+    port: 27000
+security:
+    authorization: enabled
+
+
+Useful Shell helpers:
+----------------------------
+User Management:
+db.createUser()
+db.dropUser()
+
+Collection Management:
+db.renameCollection()
+db.collection.createIndex()
+db.collection.drop()
+
+Database Management:
+db.createCollection()
+db.dropDatabase()
+
+Database Status:
+db.serverStatus()
+
+Creating index with Database Command:
+db.runCommand(
+  { "createIndexes": <collection> },
+  { "indexes": [
+    {
+      "key": { "product": 1 }
+    },
+    { "name": "name_index" }
+    ]
+  }
+)
+
+
+Creating index with Shell Helper:
+db.<collection>.createIndex(
+  { "product": 1 },
+  { "name": "name_index" }
+)
+
+Introspect a Shell Helper:
+db.<collection>.createIndex
+Example:
+> db.zips.createIndex
+function(keys, options, commitQuorum) {
+    if (arguments.length > 3) {
+        throw new Error("createIndex accepts up to 3 arguments");
+    }
+
+    return this.createIndexes([keys], options, commitQuorum);
+}
+
+
+Question:
+Which of the following methods executes a database command?
+Answer:
+db.runCommand( { <COMMAND> } )
+
+
+Logging Basics:
+-----------------------------
+Get the logging components:
+db.getLogComponents()
+
+Change the logging level:
+db.setLogLevel(0, "index")
+
+View the logs through the Mongo shell:
+db.adminCommand({ "getLog": "global" })
+
+View the logs through the command line:
+tail -f /data/db/mongod.log
+
+Which of the following operations can be used to access the logs?
+Running db.adminCommand({ "getLog": "global" }) from the Mongo shell
+Running tail -f <path-to-log-file> from the command line
+
+
+Profiling the Database
+----------------------------------
+Get profiling level:
+db.getProfilingLevel()
+
+Set profiling level:
+db.setProfilingLevel(1)
+
+Show collections:
+db.getCollectionNames()
+
+Set slowms to 0:
+db.setProfilingLevel( 1, { slowms: 0 } )
+
+Insert one document into a new collection:
+db.new_collection.insert( { "a": 1 } )
+
+Get profiling data from system.profile:
+db.system.profile.find().pretty()
+
+Which of the following events are captured by the profiler?
+YES: Configuration operations, CRUD operations, Administrative operations
+NO: Network timeouts, WiredTiger storage operations
+
+
+Client Authentication Mechanisms:
+===================================
+1. SCRAM
+2. X.509
+MongoDB Enterprise only:
+3. LDAP
+4. KERBEROS
+
+MongoDB also supports Cluster Authentication Mechanisms also.
+
+
