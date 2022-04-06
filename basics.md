@@ -44,6 +44,25 @@ How many businesses in the sample_training.inspections dataset have the inspecti
 Answer:
 db.inspections.find({"result":"Out of Business","sector":"Home Improvement Contractor - 100"}).count();
 
+	
+Question:
+</br>People often confuse NEW YORK City as the capital of New York state, when in reality the capital of New York state is ALBANY.
+
+</br>In the sample_training.zips collection add a boolean field "capital?" to all documents pertaining to ALBANY NY, and NEW YORK, NY. The value of the field should be true for all ALBANY documents and false for all NEW YORK documents.
+
+<br/> Answer 1:
+db.zips.updateMany({"state": "NY", "city":"ALBANY"},{"$set":{"capital?":true}})
+db.zips.updateMany({"state": "NY", "city":"NEW YORK"},{"$set":{"capital?":false}})
+<br/> Answer 2:
+db.zips.updateMany({state: "NY", city:{$in:["ALBANY","NEW YORK"]}},
+                                 {$set:
+                                      { capital?:
+                                            {$cond: 
+                                               [ { $eq: [ "$city", "ALBANY" ] }, true, false ]
+                                             }
+                                      } 
+                                  })
+	
 
 Question:
 How many zips in the sample_training.zips dataset are neither over-populated nor under-populated?
