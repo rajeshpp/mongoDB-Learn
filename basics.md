@@ -53,18 +53,9 @@ Question:
 <br/> Answer 1:
 <br/> db.zips.updateMany({"state": "NY", "city":"ALBANY"},{"$set":{"capital?":true}})
 <br/> db.zips.updateMany({"state": "NY", "city":"NEW YORK"},{"$set":{"capital?":false}})
-<br/> Answer 2:
-<br/> db.zips.updateMany({state: "NY", city:{$in:["ALBANY","NEW YORK"]}},
-                                 {$set:
-                                      { capital?:
-                                            {$cond: 
-                                               [ { $eq: [ "$city", "ALBANY" ] }, true, false ]
-                                             }
-                                      } 
-                                  })
 	
 
-Question:
+<br/>Question:
 How many zips in the sample_training.zips dataset are neither over-populated nor under-populated?
 
 In this case, we consider population of more than 1,000,000 to be over- populated and less than 5,000 to be under-populated.
