@@ -51,10 +51,10 @@ Question:
 </br>In the sample_training.zips collection add a boolean field "capital?" to all documents pertaining to ALBANY NY, and NEW YORK, NY. The value of the field should be true for all ALBANY documents and false for all NEW YORK documents.
 
 <br/> Answer 1:
-db.zips.updateMany({"state": "NY", "city":"ALBANY"},{"$set":{"capital?":true}})
-db.zips.updateMany({"state": "NY", "city":"NEW YORK"},{"$set":{"capital?":false}})
+<br/> db.zips.updateMany({"state": "NY", "city":"ALBANY"},{"$set":{"capital?":true}})
+<br/> db.zips.updateMany({"state": "NY", "city":"NEW YORK"},{"$set":{"capital?":false}})
 <br/> Answer 2:
-db.zips.updateMany({state: "NY", city:{$in:["ALBANY","NEW YORK"]}},
+<br/> db.zips.updateMany({state: "NY", city:{$in:["ALBANY","NEW YORK"]}},
                                  {$set:
                                       { capital?:
                                             {$cond: 
