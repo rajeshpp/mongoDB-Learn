@@ -114,7 +114,7 @@ db.zips.find({"pop":{"$lt":1000000,"$gt":5000}}).count();
 
 
 MQL Syntax: { <field> : { <operator> : <value> } }
-Aggregation Syntax: { <operator> : { <field>, <value> } }
+<br/>Aggregation Syntax: { <operator> : { <field>, <value> } }
 
 Question:
 What is the name of the listing in the sample_airbnb.listingsAndReviews dataset that accommodates more than 6 people and has exactly 50 reviews?
