@@ -95,20 +95,19 @@ In this case, we consider population of more than 1,000,000 to be over- populate
 Answer:
 db.zips.find({"pop":{"$lt":1000000,"$gt":5000}}).count();
 
-Question:
-How many companies in the sample_training.companies dataset were
-either founded in 2004
-	•	[and] either have the social category_code [or] web category_code,
-[or] were founded in the month of October
-	•	[and] also either have the social category_code [or] web category_code?
-Copy/paste the exact numeric value (without double quotes) of the result that you get into the response field.
-Answer:
-db.companies.find({"$and":
-			[
-				{"$or":[{"founded_year":{"$eq":2004}},{"founded_month":{"$eq":10}}]},
-				{"$or":[{"category_code":{"$eq":"web"}},{"category_code":{"$eq":"social"}}]}
-			]
-		})
+<br/>Question:
+<br/>How many companies in the sample_training.companies dataset were either founded in 2004
+<br/>	•	[and] either have the social category_code [or] web category_code,
+<br/>[or] were founded in the month of October
+<br/>	•	[and] also either have the social category_code [or] web category_code?
+<br/>Copy/paste the exact numeric value (without double quotes) of the result that you get into the response field.
+<br/>Answer:
+<br/>db.companies.find({"$and":
+<br/>			[
+<br/>				{"$or":[{"founded_year":{"$eq":2004}},{"founded_month":{"$eq":10}}]},
+<br/>				{"$or":[{"category_code":{"$eq":"web"}},{"category_code":{"$eq":"social"}}]}
+<br/>			]
+<br/>		})
 
 
 
