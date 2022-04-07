@@ -165,6 +165,25 @@ db.listingsAndReviews.find({ "amenities": "Wifi" },
                              "_id": 0, "maximum_nights":0 }).pretty()
 
 
+
+
+Some Examples:
+--------------
+use sample_training
+
+db.trips.findOne({ "start station location.type": "Point" })
+
+db.companies.find({ "relationships.0.person.last_name": "Zuckerberg" },{ "name": 1 }).pretty()
+
+db.companies.find({ "relationships.0.person.first_name": "Mark","relationships.0.title": { "$regex": "CEO" } },{ "name": 1 }).count()
+
+db.companies.find({ "relationships.0.person.first_name": "Mark","relationships.0.title": {"$regex": "CEO" } },{ "name": 1 }).pretty()
+
+db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).pretty()
+
+db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).count()
+
+	
 Question:
 Find all documents where the student in class 431 received a grade higher than 85 for any type of assignment:
 
@@ -196,23 +215,6 @@ Which of the following queries will return only the names of companies from the 
 
 Answer:
 db.companies.find({ "funding_rounds": { "$size": 8 } },{ "name": 1, "_id": 0 })
-
-Some Examples:
---------------
-use sample_training
-
-db.trips.findOne({ "start station location.type": "Point" })
-
-db.companies.find({ "relationships.0.person.last_name": "Zuckerberg" },{ "name": 1 }).pretty()
-
-db.companies.find({ "relationships.0.person.first_name": "Mark","relationships.0.title": { "$regex": "CEO" } },{ "name": 1 }).count()
-
-db.companies.find({ "relationships.0.person.first_name": "Mark","relationships.0.title": {"$regex": "CEO" } },{ "name": 1 }).pretty()
-
-db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).pretty()
-
-db.companies.find({ "relationships":{ "$elemMatch": { "is_past": true,"person.first_name": "Mark" } } },{ "name": 1 }).count()
-
 
 Question:
 How many trips in the sample_training.trips collection started at stations that are to the west of the -74 longitude coordinate?
