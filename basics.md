@@ -13,6 +13,38 @@ DB:
 > use sample_training;
 switched to db sample_training
 
+<br/>Updating Documents  - mongo shell
+
+<br/>1. Find all documents in the zips collection where the zip field is equal to
+   12434.
+<br/>Answer: db.zips.find({"zip":"12434"})
+<br/>2. Find all documents in the zips collection where the city field is equal to
+   “HUDSON".
+<br/>Answer: db.zips.find({"city":"HUDSON"})
+<br/>3. Find how many documents in the zips collection have the city field is equal
+   to “HUDSON".
+<br/>Answer: db.zips.find({"city":"HUDSON"}).count()
+<br/>4. Update all documents in the zips collection where the city field is equal
+   to "HUDSON" by adding 10 to the current value of the "pop" field.
+<br/>Answer: db.zips.updateMany({"city":"HUDSON"},{$inc:{"pop":10}})
+<br/>5. Update a single document in the zips collection where the zip field is
+   equal to 12534 by setting the value of the "pop" field to 17630.
+<br/>Answer: db.zips.update({"zip":"12534"},{"$set":{"pop":12534}})
+<br/>6. Update a single document in the zips collection where the zip field is
+   equal to 12534 by setting the value of the "population" field to 17630.
+<br/>Answer: db.zips.update({"zip":"12534"},{"$set":{"population":17630}})
+<br/>7. Find all documents in the grades collection where the student_id is 151,
+   and the class_id field is 339.
+<br/>Answer: db.grades.find({"student_id":151, "class_id":339})
+<br/>8. Find all documents in the grades collection where the student_id is 250,
+   and the class_id field is 339.
+<br/>Answer: db.grades.find({"student_id":250, "class_id":339})
+<br/>9. Update one document in the grades collection where the student_id is 250,
+   and the class_id field is 339, by adding a document element to the "scores"
+   array.
+<br/>Answer: db.grades.updateOne({"student_id":250, "class_id":339},{"$push":{"scores":{"type":"classwork","score":89}}})
+
+
 Question:
 How many documents in the sample_training.zips collection have fewer than 1000 people listed in the pop field?
 
