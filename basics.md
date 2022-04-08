@@ -51,6 +51,15 @@ How many documents in the sample_training.zips collection have fewer than 1000 p
 Answer:
 db.zips.find({"pop":{"$lt":1000}}).count();
 
+<br/>Question:
+<br/>What is the difference between the number of people born in 1998 and the number of people born after 1998 in the sample_training.trips collection?
+
+<br/>Answer:
+<br/>sample_training> db.trips.find({"birth year":1998}).count()
+<br/>12
+<br/>sample_training> db.trips.find({"birth year":{"$gt":1998}}).count()
+<br/>18
+
 Question:
 Using the sample_training.routes collection find out which of the following statements will return all routes that have at least one stop in them?
 
