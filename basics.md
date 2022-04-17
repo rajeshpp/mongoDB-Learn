@@ -278,6 +278,9 @@ Expressive Query Operator
 <br/>==> 1. db.companies.find({ "$expr": { "$lt": [ "$founded_year", "$number_of_employees" ] } })
 <br/>==> 2. db.companies.find({ "$expr": { "$gt": [ "$number_of_employees", "$founded_year" ]} }).count()
 
+<br/> 4. How many companies in the sample_training.companies collection have the same permalink as their twitter_username?
+<br/>==> db.companies.find({"$expr":{"$eq":["$permalink","$twitter_username"]}}).count()
+
 Array Operators
 1. Find all documents that contain more than one amenity without caring about the order of array elements.
 => db.listingsAndReviews.find({"$expr":{"$gte":["$amenities",1]}}).count()
