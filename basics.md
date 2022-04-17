@@ -130,6 +130,8 @@ What is the name of the listing in the sample_airbnb.listingsAndReviews dataset 
 Answer:
 db.listingsAndReviews.find({"accommodates":{"$gt":6},"reviews":{"$size":50}}).pretty()
 
+<img width="729" alt="image" src="https://user-images.githubusercontent.com/19406666/163716095-54815413-6722-45ac-8188-88e23163756f.png">
+
 Question:
 Using the sample_airbnb.listingsAndReviews collection find out how many documents have the "property_type" "House", and include "Changing table" as one of the "amenities"?
 
