@@ -122,8 +122,7 @@ db.zips.find({"pop":{"$lt":1000000,"$gt":5000}}).count();
 
 
 
-MQL Syntax: { <field> : { <operator> : <value> } }
-<br/>Aggregation Syntax: { <operator> : { <field>, <value> } }
+<img width="650" height="150" alt="image" src="https://user-images.githubusercontent.com/19406666/163700732-cd40870b-3a4c-4cf5-b4e5-e60495cf4167.png">
 
 Question:
 What is the name of the listing in the sample_airbnb.listingsAndReviews dataset that accommodates more than 6 people and has exactly 50 reviews?
