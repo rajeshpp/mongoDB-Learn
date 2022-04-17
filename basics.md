@@ -274,6 +274,10 @@ Expressive Query Operator
 2. Find all documents where the trip lasted longer than 1200 seconds, and started and ended at the same station.
 => db.trips.find({"$expr":{"$and":[{"$gt":["$tripduration", 1200]},{"$eq":["$start station id","$end station id"]}]}}).count()
 
+<br/>3. Which of the following statements will find all the companies that have more employees than the year in which they were founded?
+<br/>==> 1. db.companies.find({ "$expr": { "$lt": [ "$founded_year", "$number_of_employees" ] } })
+<br/>==> 2. db.companies.find({ "$expr": { "$gt": [ "$number_of_employees", "$founded_year" ]} }).count()
+
 Array Operators
 1. Find all documents that contain more than one amenity without caring about the order of array elements.
 => db.listingsAndReviews.find({"$expr":{"$gte":["$amenities",1]}}).count()
