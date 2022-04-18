@@ -359,9 +359,24 @@ db.listingsAndReviews.aggregate([{ "$project": { "address": 1, "_id": 0 }},{ "$g
 => db.zips.find().sort({"pop":1, "city":-1}).pretty()
 
 
-** MongoDB Assumes that you have performed sort and then limit. So, with that said, both the below queries works same:
-	db.zips.find().sort({"pop":1, "city":-1}).limit(2).pretty()
-	db.zips.find().limit(2).sort({"pop":1, "city":-1}).pretty()
+<br/><br/> MongoDB Assumes that you have performed sort and then limit. So, with that said, both the below queries works same:
+	<br/>db.zips.find().sort({"pop":1, "city":-1}).limit(2).pretty()
+	<br/>db.zips.find().limit(2).sort({"pop":1, "city":-1}).pretty()
+	
+
+<br/><br/>Sample Commands:
+<br/>use sample_training
+
+<br/>db.zips.find().sort({ "pop": 1 }).limit(1)
+
+<br/>db.zips.find({ "pop": 0 }).count()
+
+<br/>db.zips.find().sort({ "pop": -1 }).limit(1)
+
+<br/>db.zips.find().sort({ "pop": -1 }).limit(10)
+
+<br/>db.zips.find().sort({ "pop": 1, "city": -1 })
+
 
 QUIZ:
 -------
