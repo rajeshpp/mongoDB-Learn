@@ -320,24 +320,23 @@ Aggregation Framework
 
 -->> cursor methods: sort(), limit(), pretty(), count()
 
-1. Using the aggregation framework find all documents that have Wifi as one of the amenities. Only include price and address in the resulting cursor.
-=> db.listingsAndReviews.aggregate([{$match:{"amenities":"Wifi"}},{$project:{"price":1,"address":1}}]).pretty()
-=> db.listingsAndReviews.aggregate([{$match:{"amenities":"Wifi"}},{$project:{"price":1,"address":1}}]).count()
-uncaught exception: TypeError: db.listingsAndReviews.aggregate(...).count is not a function :
-2. Which countries have listings in the sample_airbnb database?
+<br/>1. Using the aggregation framework find all documents that have Wifi as one of the amenities. Only include price and address in the resulting cursor.
+<br/>With MQL: db.listingsAndReviews.find({ "amenities": "Wifi" },{ "price": 1, "address": 1, "_id": 0 }).pretty()
+<br/>With Aggregation FrameWork: db.listingsAndReviews.aggregate([{ "$match": { "amenities": "Wifi" } },{ "$project": { "price": 1,"address": 1,"_id": 0 }}]).pretty()
+<br/>2. Which countries have listings in the sample_airbnb database?
 => db.listingsAndReviews.aggregate([{$project:{"address":1,"_id":0}},{$group:{"_id":"$address.country"}}]);
-3. How many countries have listings in the sample_airbnb database?
+<br/>3. How many countries have listings in the sample_airbnb database?
 => db.listingsAndReviews.aggregate([
                                   { "$project": { "address": 1, "_id": 0 }},
                                   { "$group": { "_id": "$address.country",
                                                 "count": { "$sum": 1 } } }
                                 	])
-4. What room types are present in the sample_airbnb.listingsAndReviews collection?
+<br/>4. What room types are present in the sample_airbnb.listingsAndReviews collection?
 => db.listingsAndReviews.aggregate([{$project:{"room_type":1,_id:0}},{$group:{"_id":"$room_type"}}]);
-5. What are the differences between using aggregate() and find()?
+<br/>5. What are the differences between using aggregate() and find()?
 => aggregate() allows us to compute and reshape data in the cursor.
 => aggregate() can do what find() can and more.
-6. In what year was the youngest bike rider from the sample_training.trips collection born?
+<br/>6. In what year was the youngest bike rider from the sample_training.trips collection born?
 => db.trips.aggregate([{$project:{"birth year" : 1, "_id":0}},{$group:{"_id":"$birth year"}}]); //1999
 	#This is not optimal solution. We have to look manually for lowest year from the values returned.
 => db.trips.find({"birth year":{"$gt":0}},{"birth year":1}).sort({"birth year":-1}).limit(1) //1999
