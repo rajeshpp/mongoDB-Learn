@@ -340,6 +340,13 @@ Aggregation Framework
 => db.trips.aggregate([{$project:{"birth year" : 1, "_id":0}},{$group:{"_id":"$birth year"}}]); //1999
 	#This is not optimal solution. We have to look manually for lowest year from the values returned.
 => db.trips.find({"birth year":{"$gt":0}},{"birth year":1}).sort({"birth year":-1}).limit(1) //1999
+<br/>7. Find one document in the collection and only include the address field in the resulting cursor.
+=> db.listingsAndReviews.findOne({ },{ "address": 1, "_id": 0 })
+<br/>8. Project only the address field value for each document, then group all documents into one document per address.country value.
+db.listingsAndReviews.aggregate([ { "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country" }}])
+<br/>9. Project only the address field value for each document, then group all documents into one document per address.country value, and count one for each document in each group.
+db.listingsAndReviews.aggregate([{ "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country","count": { "$sum": 1 } } }])
+
 
 
 1. Find the least populated ZIP code in the zips collection.
