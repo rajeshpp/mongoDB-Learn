@@ -324,28 +324,24 @@ Aggregation Framework
 <br/>With MQL: db.listingsAndReviews.find({ "amenities": "Wifi" },{ "price": 1, "address": 1, "_id": 0 }).pretty()
 <br/>With Aggregation FrameWork: db.listingsAndReviews.aggregate([{ "$match": { "amenities": "Wifi" } },{ "$project": { "price": 1,"address": 1,"_id": 0 }}]).pretty()
 <br/>2. Which countries have listings in the sample_airbnb database?
-=> db.listingsAndReviews.aggregate([{$project:{"address":1,"_id":0}},{$group:{"_id":"$address.country"}}]);
+<br/>=> db.listingsAndReviews.aggregate([{$project:{"address":1,"_id":0}},{$group:{"_id":"$address.country"}}]);
 <br/>3. How many countries have listings in the sample_airbnb database?
-=> db.listingsAndReviews.aggregate([
-                                  { "$project": { "address": 1, "_id": 0 }},
-                                  { "$group": { "_id": "$address.country",
-                                                "count": { "$sum": 1 } } }
-                                	])
+<br/>=> db.listingsAndReviews.aggregate([{ "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country","count": { "$sum": 1 } } }])
 <br/>4. What room types are present in the sample_airbnb.listingsAndReviews collection?
-=> db.listingsAndReviews.aggregate([{$project:{"room_type":1,_id:0}},{$group:{"_id":"$room_type"}}]);
+<br/>=> db.listingsAndReviews.aggregate([{$project:{"room_type":1,_id:0}},{$group:{"_id":"$room_type"}}]);
 <br/>5. What are the differences between using aggregate() and find()?
-=> aggregate() allows us to compute and reshape data in the cursor.
-=> aggregate() can do what find() can and more.
+<br/>=> aggregate() allows us to compute and reshape data in the cursor.
+<br/>=> aggregate() can do what find() can and more.
 <br/>6. In what year was the youngest bike rider from the sample_training.trips collection born?
-=> db.trips.aggregate([{$project:{"birth year" : 1, "_id":0}},{$group:{"_id":"$birth year"}}]); //1999
-	#This is not optimal solution. We have to look manually for lowest year from the values returned.
-=> db.trips.find({"birth year":{"$gt":0}},{"birth year":1}).sort({"birth year":-1}).limit(1) //1999
+<br/>=> db.trips.aggregate([{$project:{"birth year" : 1, "_id":0}},{$group:{"_id":"$birth year"}}]); //1999
+	<br/>#This is not optimal solution. We have to look manually for lowest year from the values returned.
+<br/>=> db.trips.find({"birth year":{"$gt":0}},{"birth year":1}).sort({"birth year":-1}).limit(1) //1999
 <br/>7. Find one document in the collection and only include the address field in the resulting cursor.
-=> db.listingsAndReviews.findOne({ },{ "address": 1, "_id": 0 })
+<br/>=> db.listingsAndReviews.findOne({ },{ "address": 1, "_id": 0 })
 <br/>8. Project only the address field value for each document, then group all documents into one document per address.country value.
-db.listingsAndReviews.aggregate([ { "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country" }}])
+<br/>db.listingsAndReviews.aggregate([ { "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country" }}])
 <br/>9. Project only the address field value for each document, then group all documents into one document per address.country value, and count one for each document in each group.
-db.listingsAndReviews.aggregate([{ "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country","count": { "$sum": 1 } } }])
+<br/>db.listingsAndReviews.aggregate([{ "$project": { "address": 1, "_id": 0 }},{ "$group": { "_id": "$address.country","count": { "$sum": 1 } } }])
 
 
 
