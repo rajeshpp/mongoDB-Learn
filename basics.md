@@ -376,34 +376,34 @@ db.listingsAndReviews.aggregate([{ "$project": { "address": 1, "_id": 0 }},{ "$g
 QUIZ:
 -------
 1. Which of the following commands will return the name and founding year for the 5 oldest companies in the sample_training.companies collection?
-=> db.companies.find({"founded_year":{"$gt":0}},{"name":1,"founded_year":1,"_id":0}).sort({"founded_year":1}).limit(5).pretty()
-=> db.companies.find({"founded_year":{"$ne":null}},{"name":1,"founded_year":1}).limit(5).sort({"founded_year":1})
-=> db.companies.find({"founded_year":{"$ne":null}},{"name":1,"founded_year":1 }).sort({"founded_year":1}).limit(5)
+<br/>=> db.companies.find({"founded_year":{"$gt":0}},{"name":1,"founded_year":1,"_id":0}).sort({"founded_year":1}).limit(5).pretty()
+<br/>=> db.companies.find({"founded_year":{"$ne":null}},{"name":1,"founded_year":1}).limit(5).sort({"founded_year":1})
+<br/>=> db.companies.find({"founded_year":{"$ne":null}},{"name":1,"founded_year":1 }).sort({"founded_year":1}).limit(5)
 
 
 Introduction to Indexes
 -----------------------------
 
 use sample_training
-db.trips.find({ "birth year": 1989 })
-db.trips.find({ "start station id": 476 }).sort( { "birth year": 1 } )
-db.trips.createIndex({ "birth year": 1 })
-db.trips.createIndex({ "start station id": 1, "birth year": 1 })
+<br/>db.trips.find({ "birth year": 1989 })
+<br/>db.trips.find({ "start station id": 476 }).sort( { "birth year": 1 } )
+<br/>db.trips.createIndex({ "birth year": 1 })
+<br/>db.trips.createIndex({ "start station id": 1, "birth year": 1 })
 
 
-1. Create two separate indexes to support the following queries:
-	db.trips.find({"birth year": 1989})
-Ans: db.trips.createIndex({"birth year":1});
-	db.trips.find({"start station id": 476}).sort({"birth year": 1})
-Ans: db.trips.createIndex({"birth year":1, "start station id":1});
+1. Create two separate indexes to support the following queries: 
+	<br/>1.a. db.trips.find({"birth year": 1989})
+	<br/>Ans: db.trips.createIndex({"birth year":1});
+	<br/>1.b. db.trips.find({"start station id": 476}).sort({"birth year": 1})
+	<br/>Ans: db.trips.createIndex({"birth year":1, "start station id":1});
 2. Jameela often queries the sample_training.routes collection by the src_airport field like this:
-	db.routes.find({ "src_airport": "MUC" }).pretty()
-   Which command will create an index that will support this query?
-Ans: db.routes.createIndex({ "src_airport": -1 })
+	<br/>db.routes.find({ "src_airport": "MUC" }).pretty()
+   <br/>Which command will create an index that will support this query?
+<br/>Ans: db.routes.createIndex({ "src_airport": -1 })
 
 Upsert example:
 ---------------
-db.iot.updateOne({ "sensor": r.sensor, "date": r.date,
+<br/>db.iot.updateOne({ "sensor": r.sensor, "date": r.date,
                    "valcount": { "$lt": 48 } },
                          { "$push": { "readings": { "v": r.value, "t": r.time } },
                         "$inc": { "valcount": 1, "total": r.value } },
