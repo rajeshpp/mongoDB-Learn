@@ -64,8 +64,8 @@ Question:
 Using the sample_training.routes collection find out which of the following statements will return all routes that have at least one stop in them?
 
 Answer:
-db.routes.find({ "stops": { "$gt": 0 }}).pretty()
-db.routes.find({ "stops": { "$ne": 0 }}).pretty()
+<br/>db.routes.find({ "stops": { "$gt": 0 }}).pretty()
+<br/>db.routes.find({ "stops": { "$ne": 0 }}).pretty()
 
 
 
